@@ -1,8 +1,21 @@
-import React, { Component } from "react";
+import * as React from "react";
 
-import { ScaledPropsProvider, withScaledProps } from "react-scaled-props";
+import {
+  ScaledPropsProvider,
+  withScaledProps,
+  WithScaledPropsProps
+} from "react-scaled-props";
 
-function ExampleComponent(props) {
+interface ExampleComponentScaledProps {
+  fontSize: number;
+  opacity: number;
+}
+
+type ExampleComponentProps = WithScaledPropsProps<
+  ExampleComponentScaledProps
+> & { text: string };
+
+function ExampleComponent(props: ExampleComponentProps) {
   const { scaledProps } = props;
 
   const { fontSize, opacity } = scaledProps;
@@ -34,7 +47,7 @@ const WithScaledPropsExampleComponent = withScaledProps({
   }
 })(ExampleComponent);
 
-export default class App extends Component {
+export default class App extends React.Component {
   render() {
     return (
       <ScaledPropsProvider
@@ -43,7 +56,7 @@ export default class App extends Component {
         minScreenHeight={400}
         maxScreenHeight={700}
       >
-        <WithScaledPropsExampleComponent />
+        <WithScaledPropsExampleComponent text="foo" />
       </ScaledPropsProvider>
     );
   }
