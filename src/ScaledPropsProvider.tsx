@@ -1,9 +1,12 @@
 import * as React from "react";
 import { ScreenSizeProvider } from "./context";
 import throttle from "lodash.throttle";
+import debounce from "lodash.debounce";
 import { Cancelable } from "lodash";
 
 import { getViewPortHeight, getViewPortWidth } from "./screenSizeUtil";
+
+type RefreshBehavior = "onResizeComplete" | "onResize";
 
 interface ScaledPropsProviderState {
   screenWidth: number | null;
@@ -15,10 +18,12 @@ interface ScaledPropsProviderProps {
   maxScreenWidth?: number;
   minScreenHeight?: number;
   maxScreenHeight?: number;
+  refreshBehavior?: RefreshBehavior;
   refreshRate?: number;
 }
 
-const defaultRefreshRate = 200;
+const defaultThrottlingRefreshRate = 200;
+const defaultDebouncingRefreshRate = 200;
 
 export default class ScaledPropsProvider extends React.Component<
   ScaledPropsProviderProps,
@@ -40,10 +45,19 @@ export default class ScaledPropsProvider extends React.Component<
   componentDidMount() {
     this.setScreenSize();
 
-    this.resizeEventListener = throttle(
-      this.setScreenSize,
-      this.props.refreshRate || defaultRefreshRate
-    );
+    const { refreshBehavior = "onResize", refreshRate } = this.props;
+
+    if (refreshBehavior === "onResize") {
+      const throttleWait =
+        refreshRate !== undefined ? refreshRate : defaultThrottlingRefreshRate;
+
+      this.resizeEventListener = throttle(this.setScreenSize, throttleWait);
+    } else if (refreshBehavior === "onResizeComplete") {
+      const debounceWait =
+        refreshRate !== undefined ? refreshRate : defaultDebouncingRefreshRate;
+
+      this.resizeEventListener = debounce(this.setScreenSize, debounceWait);
+    }
     window.addEventListener("resize", this.resizeEventListener);
   }
 

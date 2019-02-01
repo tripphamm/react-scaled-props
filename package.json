@@ -22,7 +22,9 @@
     "deploy": "gh-pages -d example/build"
   },
   "dependencies": {
+    "@types/lodash.debounce": "^4.0.4",
     "@types/lodash.throttle": "^4.1.4",
+    "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1"
   },
   "peerDependencies": {

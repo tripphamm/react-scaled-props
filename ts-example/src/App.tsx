@@ -55,6 +55,8 @@ export default class App extends React.Component {
         maxScreenWidth={1200}
         minScreenHeight={400}
         maxScreenHeight={700}
+        refreshBehavior="onResizeComplete"
+        refreshRate={300}
       >
         <WithScaledPropsExampleComponent text="foo" />
       </ScaledPropsProvider>
