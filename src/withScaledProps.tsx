@@ -36,18 +36,18 @@ interface ScalableProps {
 }
 
 export interface WithScaledPropsProps<T> {
-  scaledProps: { [P in keyof T]: number } | {};
+  scaledProps: { [P in keyof T]: number };
 }
 
 export const withScaledProps = <T extends ScalableProps>(scalableProps: T) => {
-  return <CombinedProps extends WithScaledPropsProps<T>>(
-    OriginalComponent: React.ComponentType<CombinedProps>
+  return <AllProps extends WithScaledPropsProps<T>>(
+    OriginalComponent: React.ComponentType<AllProps>
   ) => {
-    type OriginalProps = Subtract<CombinedProps, WithScaledPropsProps<T>>;
-
-    const WithScaledProps: React.FunctionComponent<OriginalProps> & {
-      WrappedComponent?: React.ComponentType<CombinedProps>;
-    } = (props: OriginalProps) => {
+    type InjectedProps = WithScaledPropsProps<T>;
+    type NonInjectedProps = Subtract<AllProps, InjectedProps>;
+    const WithScaledProps: React.FunctionComponent<NonInjectedProps> & {
+      WrappedComponent?: React.ComponentType<AllProps>;
+    } = (props: AllProps) => {
       return (
         <ScreenSizeConsumer>
           {screenSizeContext => {
@@ -61,7 +61,10 @@ export const withScaledProps = <T extends ScalableProps>(scalableProps: T) => {
             } = screenSizeContext;
 
             const scaledProps = Object.keys(scalableProps).reduce(
-              (aggregator, scalablePropName) => {
+              (
+                aggregator: { [P in keyof T]: number },
+                scalablePropName: keyof T
+              ) => {
                 const scalableProp = scalableProps[scalablePropName];
 
                 const {
@@ -143,7 +146,7 @@ export const withScaledProps = <T extends ScalableProps>(scalableProps: T) => {
 
                 return {
                   ...aggregator,
-                  [scalablePropName]: value
+                  [scalablePropName as keyof T]: value
                 };
               },
               {}
