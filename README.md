@@ -53,7 +53,7 @@ import { withScaledProps } from "react-scaled-props";
 
 const MySubComponent = props => {
   const { scaledProps } = props;
-  const { fontSize } = scaledProps;
+  const { fontSize, opacity } = scaledProps;
 
   return (
     <>
