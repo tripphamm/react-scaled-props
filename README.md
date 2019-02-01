@@ -56,25 +56,28 @@ const MySubComponent = props => {
   const { fontSize, opacity } = scaledProps;
 
   return (
-    <>
+    <div>
       <p style={{ fontSize }}>
-        This text will grow and shrink with the window size!
+        This text will grow and shrink as the screen <strong>width</strong>{" "}
+        changes!
       </p>
       <p style={{ opacity }}>
-        This text will appear and disappear as the window size changes!
+        This text will appear and disappear as the screen{" "}
+        <strong>height</strong> changes!
       </p>
-    </>
+    </div>
   );
 };
 
 export default withScaledProps({
   fontSize: {
-    min: 10,
-    max: 22
+    min: 20,
+    max: 40
   },
   opacity: {
     min: 0.1,
-    max: 1
+    max: 1,
+    scaledBy: "height"
   }
 })(MySubComponent);
 ```
@@ -83,21 +86,22 @@ export default withScaledProps({
 
 ```tsx
 import * as React from "react";
-import { ScaledProps } from "react-scaled-props";
+import { WithScaledPropsProps } from "react-scaled-props";
 
 // create an interface for the specific props that will be passed to `withScaledProps`
-interface MySubComponentScaledProps {
+// this can have whichever keys you'd like, but all of the values must be type: number
+interface ScaledProps {
   fontSize: number;
   opacity: number;
 }
 
 // create an interface for any other props that the component uses
-interface MySubComponentOwnProps {
+interface OwnProps {
   someOtherProp: string;
 }
 
-// Intersect the "OwnProps" with the ScaledProps
-type Props = MySubComponentOwnProps & ScaledProps<MySubComponentScaledProps>;
+// Intersect the "OwnProps" with the WithScaledPropsProps
+type Props = OwnProps & WithScaledPropsProps<ScaledProps>;
 
 class MySubComponent<Props> {
   ...
