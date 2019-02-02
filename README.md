@@ -58,12 +58,12 @@ const MySubComponent = props => {
   return (
     <div>
       <p style={{ fontSize }}>
-        This text will grow and shrink as the screen <strong>width</strong>{" "}
+        This text will grow and shrink as the screen<strong>width</strong>
         changes!
       </p>
       <p style={{ opacity }}>
-        This text will appear and disappear as the screen{" "}
-        <strong>height</strong> changes!
+        This text will appear and disappear as the screen<strong>height</strong>
+        changes!
       </p>
     </div>
   );
