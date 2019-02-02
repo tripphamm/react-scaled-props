@@ -107,8 +107,8 @@ class MySubComponent extends React.Component<Props> {
 ### ScaledPropsProvider
 
 - Context provider which watches the screen size and updates scaled props components
-- Can be configured to only update when resizing is completed in order to reduce the number of re-renders during resizing via `refreshBehavior`
-- Can be configured to update more or less frequently while resizing via `refreshRate`
+- Can be configured to only update when resizing is completed in order to reduce the number of re-renders during resizing (see `refreshBehavior`)
+- Can be configured to update more or less frequently while resizing (see `refreshRate`)
 
 | Name            | Type                             | Required | Default    | Description                                                                                                                                                  |
 | --------------- | -------------------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -122,8 +122,8 @@ class MySubComponent extends React.Component<Props> {
 ### withScaledProps
 
 - High-order component which injects scaled props into any component
-- Scaled props can respond to width OR height changes via `scaledBy`
-- Individual scaled props can override the global min/max screen sizes set by `ScaledPropsProvider` via `min/maxScreenSizeOverride`
+- Scaled props can respond to width OR height changes (see `scaledBy`)
+- Individual scaled props can override the global min/max screen sizes set by `ScaledPropsProvider` (see `min/maxScreenSizeOverride`)
   Examples:
 
 ```jsx
