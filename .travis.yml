@@ -5,4 +5,4 @@ env: SKIP_PREFLIGHT_CHECK=true
 script:
   - npm run build
   - cd example & npm run build
-  - cd ../ts-example & npm run build
+  - cd ts-example & npm run build

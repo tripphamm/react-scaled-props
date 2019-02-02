@@ -2,7 +2,7 @@
 
 > Props that scale based on window-size
 
-[![NPM](https://img.shields.io/npm/v/react-scaled-props.svg)](https://www.npmjs.com/package/react-scaled-props) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![NPM](https://img.shields.io/npm/v/react-scaled-props.svg)](https://www.npmjs.com/package/react-scaled-props) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![Build Status](https://travis-ci.org/tripphamm/react-scaled-props.svg?branch=master)](https://travis-ci.org/tripphamm/react-scaled-props)
 
 ## Install
 
@@ -17,8 +17,8 @@ npm install --save react-scaled-props
 Near the root of the app, add the `ScaledPropsProvider` component. This watches the screen size and provides context to any components in the tree that use scaled props. Any scaled prop will reach its maximum value when the screen width is >= `maxScreenWidth` and will reach its minimum value when the screen width is <= `minScreenWidth`. For scaling based on height, add `minScreenHeight` and `maxScreenHeight`.
 
 ```jsx
-import * as React from "react";
-import { ScaledPropsProvider } from "react-scaled-props";
+import * as React from 'react';
+import { ScaledPropsProvider } from 'react-scaled-props';
 
 class App extends React.Component {
   render() {
@@ -36,8 +36,8 @@ class App extends React.Component {
 Anywhere under the `ScaledPropsProvider`, use the `withScaledProps` HOC.
 
 ```jsx
-import * as React from "react";
-import { withScaledProps } from "react-scaled-props";
+import * as React from 'react';
+import { withScaledProps } from 'react-scaled-props';
 
 const MySubComponent = props => {
   const { scaledProps } = props;
@@ -60,13 +60,13 @@ const MySubComponent = props => {
 export default withScaledProps({
   fontSize: {
     minValue: 20,
-    maxValue: 40
+    maxValue: 40,
   },
   opacity: {
     minValue: 0.1,
     maxValue: 1,
-    scaledBy: "height"
-  }
+    scaledBy: 'height',
+  },
 })(MySubComponent);
 ```
 
