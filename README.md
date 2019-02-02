@@ -10,19 +10,7 @@
 npm install --save react-scaled-props
 ```
 
-## Motivation
-
-Many responsive-styling solutions work based on breakpoints. That is, once the screen reaches a certain size, styles change. This works pretty well, but _can_ lead to awkward edge-cases e.g. when the screen size is very close to a breakpoint, but not quite there, and your text is just a little too big or too small.
-
-Adding more breakpoints could solve the issue, but that adds additional complexity. `react-scaled-props` seeks to solve the issue by providing a smooth gradient of values for all of the screen sizes _between_ your breakpoints. It takes your numeric properties like `fontSize`, `height`, `width`, etc. and calculates their value based on how close you are to your largest supported window-size vs your smallest. That way, your property values are tailored to the user's exact screen size, rather than bucketing them into breakpoint-based screen classes.
-
-## Usage
-
-### Scaled Props
-
-The simplest Scaled Prop is just an object with the properties `minValue`, `maxValue`. The value that your component sees will be between those two bounds. When your screen is at or above your maximum supported width, the Scaled Prop will reach its max value, when your screen is at or below it's minimum supported width, the Scaled Prop will reach its min value.
-
-ScaledProps can also track the height of the screen rather than the width. See the API section.
+## Usage / Quickstart
 
 ### Provider
 
@@ -82,13 +70,19 @@ export default withScaledProps({
 })(MySubComponent);
 ```
 
-### Typescript
+## Motivation
+
+Many responsive-styling solutions work based on breakpoints. That is, once the screen reaches a certain size, styles change. This works pretty well, but _can_ lead to awkward edge-cases e.g. when the screen size is very close to a breakpoint, but not quite there, and your text is just a little too big or too small.
+
+Adding more breakpoints could solve the issue, but that adds additional complexity. `react-scaled-props` seeks to solve the issue by providing a smooth gradient of values for all of the screen sizes _between_ your breakpoints. It takes your numeric properties like `fontSize`, `height`, `width`, etc. and calculates their value based on how close you are to your largest supported window-size vs your smallest. That way, your property values are tailored to the user's exact screen size, rather than bucketing them into breakpoint-based screen classes.
+
+## Typescript Support
 
 ```tsx
 import * as React from "react";
 import { WithScaledPropsProps } from "react-scaled-props";
 
-// create an interface for the specific props that will be passed to `withScaledProps`
+// create an interface for the scaled props that will be passed to `withScaledProps`
 // this can have whichever keys you'd like, but all of the values must be type: number
 interface ScaledProps {
   fontSize: number;
@@ -103,7 +97,7 @@ interface OwnProps {
 // Intersect the "OwnProps" with the WithScaledPropsProps
 type Props = OwnProps & WithScaledPropsProps<ScaledProps>;
 
-class MySubComponent<Props> {
+class MySubComponent extends React.Component<Props> {
   ...
 }
 ```
@@ -111,6 +105,10 @@ class MySubComponent<Props> {
 ## API
 
 ### ScaledPropsProvider
+
+- Context provider which watches the screen size and updates scaled props components
+- Can be configured to only update when resizing is completed in order to reduce the number of re-renders during resizing via `refreshBehavior`
+- Can be configured to update more or less frequently while resizing via `refreshRate`
 
 | Name            | Type                             | Required | Default    | Description                                                                                                                                                  |
 | --------------- | -------------------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -123,7 +121,62 @@ class MySubComponent<Props> {
 
 ### withScaledProps
 
-`withScaledProps` accepts an object where each value is another object with the following properties:
+- High-order component which injects scaled props into any component
+- Scaled props can respond to width OR height changes via `scaledBy`
+- Individual scaled props can override the global min/max screen sizes set by `ScaledPropsProvider` via `min/maxScreenSizeOverride`
+  Examples:
+
+```jsx
+// specify any arbitrary name for your scaled prop
+export withScaledProps({
+  foo: {
+    minValue: 100,
+    maxValue: 999,
+  }
+})(Component);
+
+// specify multiple scaled props
+export withScaledProps({
+  foo: {
+    minValue: 100,
+    maxValue: 999,
+  },
+  bar: {
+    minValue: 1,
+    maxValue: 9,
+  }
+})(Component);
+
+// specify scaled props that respond to screen-height changes rather than screen-width
+export withScaledProps({
+  foo: {
+    minValue: 100,
+    maxValue: 999,
+    scaledBy: "height"
+  }
+})(Component);
+
+// override the global minScreenWidth/maxScreenWidth for a single scaled prop
+export withScaledProps({
+  foo: {
+    minValue: 100,
+    maxValue: 999,
+    minScreenSizeOverride: 200,
+    maxScreenSizeOverride: 768
+  }
+})(Component);
+
+// override the global minScreenHeight/maxScreenHeight for a single scaled prop
+export withScaledProps({
+  foo: {
+    minValue: 100,
+    maxValue: 999,
+    minScreenSizeOverride: 200,
+    maxScreenSizeOverride: 768,
+    scaledBy: "height"
+  }
+})(Component);
+```
 
 | Name                  | Type                | Required | Default   | Description                                                                                                                                            |
 | --------------------- | ------------------- | -------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
