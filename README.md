@@ -1,4 +1,4 @@
-# react-scaled-props
+# 📏 react-scaled-props
 
 > Props that scale based on window-size
 
