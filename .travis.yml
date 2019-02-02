@@ -1,7 +1,8 @@
 language: node_js
 node_js:
   - 9
-  - 8
+env: SKIP_PREFLIGHT_CHECK=true
 script:
   - npm run build
-  - npm run test
+  - cd example & npm run build
+  - cd ../ts-example & npm run build
