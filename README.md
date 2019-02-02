@@ -74,7 +74,7 @@ export default withScaledProps({
 
 Many responsive-styling solutions work based on breakpoints. That is, once the screen reaches a certain size, styles change. This works pretty well, but _can_ lead to awkward edge-cases e.g. when the screen size is very close to a breakpoint, but not quite there, and your text is just a little too big or too small.
 
-Adding more breakpoints could solve the issue, but that adds additional complexity. `react-scaled-props` seeks to solve the issue by providing a smooth gradient of values for all of the screen sizes _between_ your breakpoints. It takes your numeric properties like `fontSize`, `height`, `width`, etc. and calculates their value based on how close you are to your largest supported window-size vs your smallest. That way, your property values are tailored to the user's exact screen size, rather than bucketing them into breakpoint-based screen classes.
+Adding more breakpoints could solve the issue, but that adds additional complexity. `react-scaled-props` seeks to solve the issue by providing a smooth gradient of values for all of the screen sizes _between_ your breakpoints. It takes your numeric properties like `fontSize`, `height`, `width`, etc. and calculates their value based on how close you are to your largest supported window-size vs your smallest. That way, your properties are tailored to the user's exact screen size, rather than bucketed into breakpoint-based screen classes.
 
 ## Typescript Support
 
