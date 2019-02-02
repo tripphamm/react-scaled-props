@@ -14,7 +14,7 @@ npm install --save react-scaled-props
 
 ### Provider
 
-Near the root of the app, add the `ScaledPropsProvider` component. This watches the screen size and provides context to any components in the tree that use scaled props. Any scaled prop will reach its maximum value when the screen width is >= `maxScreenWidth` and will reach its minimumValue when the screen width is <= `minScreenWidth`. For scaling based on height, add `minScreenHeight` and `maxScreenHeight`.
+Near the root of the app, add the `ScaledPropsProvider` component. This watches the screen size and provides context to any components in the tree that use scaled props. Any scaled prop will reach its maximum value when the screen width is >= `maxScreenWidth` and will reach its minimum value when the screen width is <= `minScreenWidth`. For scaling based on height, add `minScreenHeight` and `maxScreenHeight`.
 
 ```jsx
 import * as React from "react";
