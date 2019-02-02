@@ -1,5 +1,5 @@
 export function getViewPortWidth() {
-  if (typeof window !== "undefined" && window.innerWidth !== undefined) {
+  if (typeof window !== 'undefined' && window.innerWidth !== undefined) {
     return window.innerWidth;
   }
 
@@ -7,7 +7,7 @@ export function getViewPortWidth() {
 }
 
 export function getViewPortHeight() {
-  if (typeof window !== "undefined" && window.innerHeight !== undefined) {
+  if (typeof window !== 'undefined' && window.innerHeight !== undefined) {
     return window.innerHeight;
   }
 

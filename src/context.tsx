@@ -1,5 +1,5 @@
-import * as React from "react";
-import { getViewPortHeight, getViewPortWidth } from "./screenSizeUtil";
+import * as React from 'react';
+import { getViewPortHeight, getViewPortWidth } from './screenSizeUtil';
 
 export interface ScreenSizeContext {
   minScreenWidth?: number;
@@ -12,7 +12,7 @@ export interface ScreenSizeContext {
 
 const context = React.createContext<ScreenSizeContext>({
   screenWidth: getViewPortWidth(),
-  screenHeight: getViewPortHeight()
+  screenHeight: getViewPortHeight(),
 });
 
 export const ScreenSizeProvider = context.Provider;

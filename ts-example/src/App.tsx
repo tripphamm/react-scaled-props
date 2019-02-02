@@ -1,19 +1,13 @@
-import * as React from "react";
+import * as React from 'react';
 
-import {
-  ScaledPropsProvider,
-  withScaledProps,
-  WithScaledPropsProps
-} from "react-scaled-props";
+import { ScaledPropsProvider, withScaledProps, WithScaledPropsProps } from 'react-scaled-props';
 
 interface ExampleComponentScaledProps {
   fontSize: number;
   opacity: number;
 }
 
-type ExampleComponentProps = WithScaledPropsProps<
-  ExampleComponentScaledProps
-> & { text: string };
+type ExampleComponentProps = WithScaledPropsProps<ExampleComponentScaledProps> & { text: string };
 
 function ExampleComponent(props: ExampleComponentProps) {
   const { scaledProps } = props;
@@ -38,13 +32,13 @@ function ExampleComponent(props: ExampleComponentProps) {
 const WithScaledPropsExampleComponent = withScaledProps({
   fontSize: {
     minValue: 20,
-    maxValue: 40
+    maxValue: 40,
   },
   opacity: {
     minValue: 0.1,
     maxValue: 1,
-    scaledBy: "height"
-  }
+    scaledBy: 'height',
+  },
 })(ExampleComponent);
 
 export default class App extends React.Component {

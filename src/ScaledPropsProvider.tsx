@@ -1,12 +1,12 @@
-import * as React from "react";
-import { ScreenSizeProvider } from "./context";
-import throttle from "lodash.throttle";
-import debounce from "lodash.debounce";
-import { Cancelable } from "lodash";
+import * as React from 'react';
+import { ScreenSizeProvider } from './context';
+import throttle from 'lodash.throttle';
+import debounce from 'lodash.debounce';
+import { Cancelable } from 'lodash';
 
-import { getViewPortHeight, getViewPortWidth } from "./screenSizeUtil";
+import { getViewPortHeight, getViewPortWidth } from './screenSizeUtil';
 
-type RefreshBehavior = "onResizeComplete" | "onResize";
+type RefreshBehavior = 'onResizeComplete' | 'onResize';
 
 interface ScaledPropsProviderState {
   screenWidth: number | null;
@@ -33,7 +33,7 @@ export default class ScaledPropsProvider extends React.Component<
 
   state: ScaledPropsProviderState = {
     screenWidth: null,
-    screenHeight: null
+    screenHeight: null,
   };
 
   constructor(props: ScaledPropsProviderProps) {
@@ -45,31 +45,29 @@ export default class ScaledPropsProvider extends React.Component<
   componentDidMount() {
     this.setScreenSize();
 
-    const { refreshBehavior = "onResize", refreshRate } = this.props;
+    const { refreshBehavior = 'onResize', refreshRate } = this.props;
 
-    if (refreshBehavior === "onResize") {
-      const throttleWait =
-        refreshRate !== undefined ? refreshRate : defaultThrottlingRefreshRate;
+    if (refreshBehavior === 'onResize') {
+      const throttleWait = refreshRate !== undefined ? refreshRate : defaultThrottlingRefreshRate;
 
       this.resizeEventListener = throttle(this.setScreenSize, throttleWait);
-    } else if (refreshBehavior === "onResizeComplete") {
-      const debounceWait =
-        refreshRate !== undefined ? refreshRate : defaultDebouncingRefreshRate;
+    } else if (refreshBehavior === 'onResizeComplete') {
+      const debounceWait = refreshRate !== undefined ? refreshRate : defaultDebouncingRefreshRate;
 
       this.resizeEventListener = debounce(this.setScreenSize, debounceWait);
     }
-    window.addEventListener("resize", this.resizeEventListener);
+    window.addEventListener('resize', this.resizeEventListener);
   }
 
   componentWillUnmount() {
     this.resizeEventListener.cancel();
-    window.removeEventListener("resize", this.resizeEventListener);
+    window.removeEventListener('resize', this.resizeEventListener);
   }
 
   setScreenSize() {
     this.setState({
       screenWidth: getViewPortWidth(),
-      screenHeight: getViewPortHeight()
+      screenHeight: getViewPortHeight(),
     });
   }
 
@@ -80,7 +78,7 @@ export default class ScaledPropsProvider extends React.Component<
       maxScreenHeight,
       minScreenWidth,
       maxScreenWidth,
-      children
+      children,
     } = this.props;
 
     const context = {
@@ -89,7 +87,7 @@ export default class ScaledPropsProvider extends React.Component<
       minScreenWidth,
       maxScreenWidth,
       screenWidth,
-      screenHeight
+      screenHeight,
     };
 
     return <ScreenSizeProvider value={context}>{children}</ScreenSizeProvider>;
