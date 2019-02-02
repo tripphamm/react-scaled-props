@@ -124,6 +124,7 @@ class MySubComponent extends React.Component<Props> {
 - High-order component which injects scaled props into any component
 - Scaled props can respond to width OR height changes (see `scaledBy`)
 - Individual scaled props can override the global min/max screen sizes set by `ScaledPropsProvider` (see `min/maxScreenSizeOverride`)
+
   Examples:
 
 ```jsx
