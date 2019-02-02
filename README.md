@@ -59,12 +59,12 @@ const MySubComponent = props => {
 
 export default withScaledProps({
   fontSize: {
-    min: 20,
-    max: 40
+    minValue: 20,
+    maxValue: 40
   },
   opacity: {
-    min: 0.1,
-    max: 1,
+    minValue: 0.1,
+    maxValue: 1,
     scaledBy: "height"
   }
 })(MySubComponent);
