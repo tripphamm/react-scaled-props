@@ -1,6 +1,6 @@
 {
   "name": "react-scaled-props",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Props that scale based on window-size",
   "author": "tripphamm",
   "license": "MIT",
