@@ -4,9 +4,9 @@
 
 [![NPM](https://img.shields.io/npm/v/react-scaled-props.svg)](https://www.npmjs.com/package/react-scaled-props) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![Build Status](https://travis-ci.org/tripphamm/react-scaled-props.svg?branch=master)](https://travis-ci.org/tripphamm/react-scaled-props)
 
-[scale by width example](https://i.ibb.co/0BCVCw8/react-scaled-props-width.gif)
+![scale by width example](https://i.ibb.co/0BCVCw8/react-scaled-props-width.gif)
 
-[scale by height example](https://i.ibb.co/92gR8vd/react-scaled-props-height.gif)
+![scale by height example](https://i.ibb.co/92gR8vd/react-scaled-props-height.gif)
 
 ## Install
 
